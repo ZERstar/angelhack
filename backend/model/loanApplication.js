@@ -20,6 +20,20 @@ const loanApplicationSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    repayment_amount: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    interval: {
+        type: Number,
+        required: true
+    },
+    interest: {
+        type: Number,
+        required: true,
+        default: 0.01
+    },
     status: {
         type: String,
         enum: ['step1', 'step2', 'step3', 'step4', 'approved', 'rejected'],
@@ -29,6 +43,7 @@ const loanApplicationSchema = new mongoose.Schema({
         eligible: { type: Boolean, default: false },
         message: { type: String }
     },
+
     created_at: {
         type: Date,
         default: Date.now

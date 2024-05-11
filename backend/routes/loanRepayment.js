@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const LoanApplications = require('../model/loanApplication');
 const LoanRepayment = require('../model/loanRepayment');
+const User = require('../model/user');
 
 
 // router.get('/:user_id', async (req, res) => {
@@ -21,42 +22,39 @@ const LoanRepayment = require('../model/loanRepayment');
 router.post('/record-repayment/:loan_id', async (req, res) => {
     try {
         const { loan_id } = req.params;
-        const { user_id, repayment_amount, repayment_date } = req.body;
-
+        const { repayment_amount } = req.body;
+        const loanApp = await LoanApplications.findById(loan_id);
+        const user = await User.findById(loanApp.user);
         // Create a new loan repayment record
         const loanRepayment = new LoanRepayment({
             loan_id,
-            user_id,
+            user_id: user._id,
             repayment_amount,
-            repayment_date,
+            repayment_date: new Date(),
             status: 'paid'
         });
-
-        // Save the repayment record
         await loanRepayment.save();
-
+        console.log(repayment_amount)
         // Update loan application with repayment details
-        let loan = await LoanApplications.findById(loan_id);
+        loanApp.repayment_amount += repayment_amount
+        await loanApp.save();
+        // Save the repayment record
 
-        if (!loan.paid_amount) {
-            loan.paid_amount = 0;
-        }
-        if (!loan.remaining_amount) {
-            loan.remaining_amount = 0;
-        }
 
-        loan.paid_amount += repayment_amount;
-        loan.remaining_amount = loan.loan_amount - repayment_amount;
+        // if (!loan.paid_amount) {
+        //     loan.paid_amount = 0;
+        // }
+        // if (!loan.remaining_amount) {
+        //     loan.remaining_amount = 0;
+        // }
 
-        await loan.save();
+        // loan.paid_amount += repayment_amount;
+        // loan.remaining_amount = loan.loan_amount - repayment_amount;
+
+        // await loan.save();
 
         res.status(201).json({
-            loanRepayment,
-            loan: {
-                total_amount: loan.loan_amount,
-                paid_amount: loan.paid_amount,
-                remaining_amount: loan.remaining_amount
-            }
+            loanApp
         });
     } catch (error) {
         console.error(error);

@@ -13,11 +13,11 @@ const loanRepaymentSchema = new mongoose.Schema({
     },
     repayment_amount: {
         type: Number,
-        required: true
+        required: true,
     },
     repayment_date: {
-        type: String,
-        default: Date.now
+        type: Date,
+        default: new Date()
     },
     status: {
         type: String,

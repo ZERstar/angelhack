@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const moment = require('moment');
 const LoanApplications = require('../model/loanApplication');
 const User = require('../model/user');
+const Installments = require('../model/installments');
 const industryData = {
     "industries": [
         {
@@ -179,22 +181,42 @@ function calculateRisk(smeData) {
 
 
 // Route to create a new loan application
+
 router.post('/new-loan', async (req, res) => {
     try {
-        const { user_id, loan_amount, loan_purpose } = req.body;
-
+        const { user_id, loan_amount, loan_purpose, interval } = req.body;
 
         const user = await User.findById(user_id);
         if (!user) {
+            return res.status(404).json({ error: 'User not found' });
         }
 
         const loanApplication = new LoanApplications({
             user: user_id,
             loan_amount,
-            loan_purpose
+            loan_purpose,
+            interval,
         });
 
         await loanApplication.save();
+
+        // Generate installment entries based on the specified interval
+        const installments = [];
+        const installmentAmount = loan_amount / interval;
+        const startDate = moment().startOf('month');
+        for (let i = 0; i < interval; i++) {
+            const dueDate = startDate.clone().add(i + 1, 'months').endOf('month');
+            installments.push({
+                user: user_id,
+                loanApplication: loanApplication._id,
+                amount: installmentAmount + (0.1 * loan_amount),
+                due_date: dueDate.toDate(), // Convert moment object to JavaScript Date
+                status: 'pending', // Initial status is pending
+            });
+        }
+
+        // Insert installment entries into the database
+        await Installments.insertMany(installments);
 
         res.status(201).json(loanApplication);
     } catch (error) {
@@ -202,6 +224,34 @@ router.post('/new-loan', async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 });
+
+
+
+// router.post('/new-loan', async (req, res) => {
+//     try {
+//         const { user_id, loan_amount, loan_purpose, interval } = req.body;
+
+
+//         const user = await User.findById(user_id);
+//         if (!user) {
+//         }
+
+//         const loanApplication = new LoanApplications({
+//             user: user_id,
+//             loan_amount,
+//             loan_purpose,
+//             interval,
+
+//         });
+
+//         await loanApplication.save();
+
+//         res.status(201).json(loanApplication);
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ error: 'Server error' });
+//     }
+// });
 router.get('/', async (req, res) => {
     try {
         const loanApplications = await LoanApplications.find();
@@ -241,6 +291,22 @@ router.patch('/:loan_id', async (req, res) => {
         console.error(error);
         res.status(500).json({ error: 'Server error' });
     }
+})
+
+router.post('/loan-repay/:id', async (req, res) => {
+    const instId = req.params.id;
+    const installment = await Installments.findById(instId);
+    const loanApp = await LoanApplications.findById(installment.loanApplication);
+    loanApp.repayment_amount += installment.amount;
+    await loanApp.save();
+    await Installments.findByIdAndDelete(instId);
+    res.status(200).json({ message: "installment paid successful", success: true });
+
+})
+router.get('/installments/:id', async (req, res) => {
+    const loanAppId = req.params.id;
+    const installments = await Installments.find({ loanApplication: loanAppId });
+    res.status(200).json(installments);
 })
 
 module.exports = router;
