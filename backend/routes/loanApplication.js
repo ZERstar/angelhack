@@ -79,6 +79,8 @@ router.post('/check-eligibility/:id', async (req, res) => {
 
     // Check SME eligibility
     const isEligible = checkEligibility(smeData);
+    loan.eligibility = isEligible
+    await loan.save();
 
     // Return eligibility result
     res.json({ isEligible });

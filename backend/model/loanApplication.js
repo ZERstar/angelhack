@@ -25,7 +25,10 @@ const loanApplicationSchema = new mongoose.Schema({
         enum: ['step1', 'step2', 'step3', 'step4', 'approved', 'rejected'],
         default: 'step1'
     },
-
+    eligibility: {
+        eligible: { type: Boolean, default: false },
+        message: { type: String }
+    },
     created_at: {
         type: Date,
         default: Date.now

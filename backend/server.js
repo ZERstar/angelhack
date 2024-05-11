@@ -20,6 +20,10 @@ mongoose.connection.once('open', () => {
 })
 // const user = require('./routes/user');
 // app.use('/user', user)
+
+app.get('/', (req, res) => {
+    res.send("Saadhan-Backend id Live ✨✨✨");
+})
 const user = require('./routes/user');
 app.use('/api/user', user)
 
