@@ -48,8 +48,7 @@ const userSchema = new mongoose.Schema({
     financials: {
         annual_revenue: Number,
         annual_profit: Number,
-        total_assets: Number,
-        total_liabilities: Number
+        credit_score: Number,
     },
     banking_details: {
         bank_name: String,
@@ -63,6 +62,11 @@ const userSchema = new mongoose.Schema({
         total_purchases: Number,
         net_tax_payable: Number
     },
+    gov_ids: {
+        pan_card: String,
+        aadhar_card: String
+    },
+
     created_at: {
         type: Date,
         default: Date.now

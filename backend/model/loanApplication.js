@@ -7,11 +7,11 @@ const loanApplicationSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
-    sme: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
+    // sme: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'User',
+    //     required: true
+    // },
     loan_amount: {
         type: Number,
         required: true
@@ -22,8 +22,12 @@ const loanApplicationSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['pending', 'approved', 'rejected'],
-        default: 'pending'
+        enum: ['step1', 'step2', 'step3', 'step4', 'approved', 'rejected'],
+        default: 'step1'
+    },
+    eligibility: {
+        eligible: { type: Boolean, default: false },
+        message: { type: String }
     },
     created_at: {
         type: Date,
