@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sizer/sizer.dart';
+
 import '../../widgets/constants/colors.dart';
 import '../../widgets/constants/texts.dart';
 import '../notification_screen.dart';
@@ -210,13 +210,203 @@ class _LoansState extends State<Loans> {
                           textAlign: TextAlign.start,
                           overflow: TextOverflow.ellipsis,
                         ),
-                        Text(
-                          'View Details',
-                          style: normalTextStyle.copyWith(
-                              color: textWhite, fontSize: 10.sp),
-                          maxLines: 1,
-                          textAlign: TextAlign.start,
-                          overflow: TextOverflow.ellipsis,
+                        GestureDetector(
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              builder: (builder) => Container(
+                                margin:
+                                    EdgeInsets.fromLTRB(2.w, 22.h, 2.w, 23.h),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: textWhite,
+                                ),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 5.w, vertical: 2.h),
+                                      child: Row(
+                                        children: [
+                                          const Spacer(),
+                                          Text(
+                                            '${workingCapital[index]}',
+                                            style: h1TextStyle.copyWith(
+                                                color: textBlack),
+                                            maxLines: 1,
+                                            textAlign: TextAlign.start,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          const Spacer(),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Icon(
+                                              Icons.close,
+                                              color: textBlack,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 5.w, vertical: 1.h),
+                                      child: Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 30.w,
+                                            child: Text(
+                                              'About:',
+                                              style: h2TextStyle.copyWith(
+                                                  color: textBlack,
+                                                  fontSize: 14.sp),
+                                              maxLines: 1,
+                                              textAlign: TextAlign.start,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          SizedBox(
+                                            width: 55.w,
+                                            child: Text(
+                                              'Procure raw materials at the right price',
+                                              style: h2TextStyle.copyWith(
+                                                  color: textBlack,
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w200),
+                                              maxLines: 2,
+                                              textAlign: TextAlign.start,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Divider(
+                                      color: Colors.grey,
+                                      thickness: 0.2.h,
+                                      indent: 5.w,
+                                      endIndent: 5.w,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 5.w, vertical: 1.h),
+                                      child: Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 30.w,
+                                            child: Text(
+                                              'Eligibility:',
+                                              style: h2TextStyle.copyWith(
+                                                  color: textBlack,
+                                                  fontSize: 14.sp),
+                                              maxLines: 1,
+                                              textAlign: TextAlign.start,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          SizedBox(
+                                            width: 55.w,
+                                            child: Text(
+                                              '1.Min. turnover Rs. 3 Crores.\n2.Business Vintage 3+ years.',
+                                              style: h2TextStyle.copyWith(
+                                                  color: textBlack,
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w200),
+                                              maxLines: 5,
+                                              textAlign: TextAlign.start,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Divider(
+                                      color: Colors.grey,
+                                      thickness: 0.2.h,
+                                      indent: 5.w,
+                                      endIndent: 5.w,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 5.w, vertical: 1.h),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          SizedBox(
+                                            width: 55.w,
+                                            child: Text(
+                                              'Loan Calculator',
+                                              style: h2TextStyle.copyWith(
+                                                  color: textBlack,
+                                                  fontSize: 14.sp),
+                                              maxLines: 1,
+                                              textAlign: TextAlign.start,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          SizedBox(
+                                            width: 30.w,
+                                            child: Text(
+                                              'Click Here',
+                                              style: h2TextStyle.copyWith(
+                                                  color: bgColor1,
+                                                  fontSize: 12.sp,
+                                                  fontWeight: FontWeight.w200),
+                                              maxLines: 2,
+                                              textAlign: TextAlign.start,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 2.h),
+                                      child: Material(
+                                        elevation: 3,
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 15.w, vertical: 2.h),
+                                          decoration: BoxDecoration(
+                                            color: bgColor1,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Text(
+                                            'Apply Now',
+                                            style: h2TextStyle.copyWith(
+                                                color: textWhite,
+                                                fontSize: 14.sp),
+                                            maxLines: 1,
+                                            textAlign: TextAlign.start,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            'View Details',
+                            style: normalTextStyle.copyWith(
+                                color: textWhite, fontSize: 10.sp),
+                            maxLines: 1,
+                            textAlign: TextAlign.start,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ],
                     ),
@@ -272,13 +462,202 @@ class _LoansState extends State<Loans> {
                         textAlign: TextAlign.start,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      Text(
-                        'View Details',
-                        style: normalTextStyle.copyWith(
-                            color: textWhite, fontSize: 10.sp),
-                        maxLines: 1,
-                        textAlign: TextAlign.start,
-                        overflow: TextOverflow.ellipsis,
+                      GestureDetector(
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (builder) => Container(
+                              margin: EdgeInsets.fromLTRB(2.w, 22.h, 2.w, 23.h),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: textWhite,
+                              ),
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 5.w, vertical: 2.h),
+                                    child: Row(
+                                      children: [
+                                        const Spacer(),
+                                        Text(
+                                          '${termLoans[index]}',
+                                          style: h1TextStyle.copyWith(
+                                              color: textBlack),
+                                          maxLines: 1,
+                                          textAlign: TextAlign.start,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        const Spacer(),
+                                        GestureDetector(
+                                          onTap: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Icon(
+                                            Icons.close,
+                                            color: textBlack,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 5.w, vertical: 1.h),
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 30.w,
+                                          child: Text(
+                                            'About:',
+                                            style: h2TextStyle.copyWith(
+                                                color: textBlack,
+                                                fontSize: 14.sp),
+                                            maxLines: 1,
+                                            textAlign: TextAlign.start,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        SizedBox(
+                                          width: 55.w,
+                                          child: Text(
+                                            'Procure raw materials at the right price',
+                                            style: h2TextStyle.copyWith(
+                                                color: textBlack,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w200),
+                                            maxLines: 2,
+                                            textAlign: TextAlign.start,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Divider(
+                                    color: Colors.grey,
+                                    thickness: 0.2.h,
+                                    indent: 5.w,
+                                    endIndent: 5.w,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 5.w, vertical: 1.h),
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 30.w,
+                                          child: Text(
+                                            'Eligibility:',
+                                            style: h2TextStyle.copyWith(
+                                                color: textBlack,
+                                                fontSize: 14.sp),
+                                            maxLines: 1,
+                                            textAlign: TextAlign.start,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        SizedBox(
+                                          width: 55.w,
+                                          child: Text(
+                                            '1.Min. turnover Rs. 3 Crores.\n2.Business Vintage 3+ years.',
+                                            style: h2TextStyle.copyWith(
+                                                color: textBlack,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w200),
+                                            maxLines: 5,
+                                            textAlign: TextAlign.start,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Divider(
+                                    color: Colors.grey,
+                                    thickness: 0.2.h,
+                                    indent: 5.w,
+                                    endIndent: 5.w,
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        horizontal: 5.w, vertical: 1.h),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        SizedBox(
+                                          width: 55.w,
+                                          child: Text(
+                                            'Loan Calculator',
+                                            style: h2TextStyle.copyWith(
+                                                color: textBlack,
+                                                fontSize: 14.sp),
+                                            maxLines: 1,
+                                            textAlign: TextAlign.start,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        SizedBox(
+                                          width: 30.w,
+                                          child: Text(
+                                            'Click Here',
+                                            style: h2TextStyle.copyWith(
+                                                color: bgColor1,
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w200),
+                                            maxLines: 2,
+                                            textAlign: TextAlign.start,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(vertical: 2.h),
+                                    child: Material(
+                                      elevation: 3,
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 15.w, vertical: 2.h),
+                                        decoration: BoxDecoration(
+                                          color: bgColor1,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: Text(
+                                          'Apply Now',
+                                          style: h2TextStyle.copyWith(
+                                              color: textWhite,
+                                              fontSize: 14.sp),
+                                          maxLines: 1,
+                                          textAlign: TextAlign.start,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'View Details',
+                          style: normalTextStyle.copyWith(
+                              color: textWhite, fontSize: 10.sp),
+                          maxLines: 1,
+                          textAlign: TextAlign.start,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ],
                   ),
@@ -306,7 +685,7 @@ class _CreditCardState extends State<CreditCard> {
     return Container(
       height: 15.h,
       width: 100.w,
-      padding: EdgeInsets.symmetric(vertical: 1.h, horizontal: 5.w),
+      padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 2.w),
       child: Column(
         children: [
           GestureDetector(
@@ -315,13 +694,12 @@ class _CreditCardState extends State<CreditCard> {
                 isFrontVisible = !isFrontVisible;
               });
             },
-            child: SvgPicture.asset(
+            child: Image.asset(
               isFrontVisible
-                  ? 'assets/images/card_front.svg'
-                  : 'assets/images/card_back.svg',
-            fit: BoxFit.fill,
+                  ? 'assets/images/card_front.png'
+                  : 'assets/images/card_back.png',
+              fit: BoxFit.fill,
             ),
-
           ),
         ],
       ),
