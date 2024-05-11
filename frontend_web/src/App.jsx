@@ -1,4 +1,4 @@
-  import { useState , useEffect } from 'react'
+import { useState , useEffect } from 'react'
   import reactLogo from './assets/react.svg'
   import viteLogo from '/vite.svg'
   import axios from 'axios'
@@ -6,6 +6,22 @@
 
   function App() {
     const [count, setCount] = useState(0)
+
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await axios.post('https://saadhan-backend.up.railway.app/api/chatbot',{
+            prompt: 'SME is eligible for a loan'
+          })
+          console.log(response.data.text)
+        } catch (error) {
+          console.error(error)
+        }
+      }
+
+      fetchData();
+    }, []);
+
 
     return (
       <>
