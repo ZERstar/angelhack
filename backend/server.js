@@ -33,9 +33,6 @@ app.use('/api/loanapp', loanApp);
 const chatBot = require('./routes/chatbot');
 app.use('/api/chatbot', chatBot);
 
-const loanRepayment = require('./routes/loanRepayment');
-app.use('/api/loanrepayment', loanRepayment);
-
 app.listen(port, () => {
     console.log("server running on port :-" + port);
 });

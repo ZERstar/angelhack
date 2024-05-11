@@ -22,15 +22,12 @@ router.post('/signup', async (req, res) => {
             username: req.body.username,
             email: req.body.email,
             password: hashedPassword,
+            phone: req.body.phone,
             company_name: req.body.company_name,
             registration_number: req.body.registration_number,
             industry: req.body.industry,
-            address: req.body.address,
-            contact_person: req.body.contact_person,
-            financials: req.body.financials,
-            banking_details: req.body.banking_details,
             gov_ids: req.body.gov_ids,
-            gst_details: req.body.gst_details,
+            gst_details: { gst_number: req.body.gst_number },
             company_age: req.body.company_age
         });
 
