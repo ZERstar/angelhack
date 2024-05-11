@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    company_age: {
+        type: Number,
+        required: true
+    },
     industry: {
         type: String,
         required: true
@@ -49,6 +53,8 @@ const userSchema = new mongoose.Schema({
         annual_revenue: Number,
         annual_profit: Number,
         credit_score: Number,
+        total_liabilities: Number,
+        total_assets: Number
     },
     banking_details: {
         bank_name: String,
