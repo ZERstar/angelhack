@@ -87,10 +87,6 @@ class _HomeScreenState extends State<HomeScreen> {
               kBottomRadius: 3.h,
             )
           : null,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.refresh),
-      ),
     );
   }
 }
