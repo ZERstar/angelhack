@@ -34,6 +34,7 @@ class _GrantScreenState extends State<GrantScreen> {
         ),
       ),
       body: Container(
+        color: textWhite,
         padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 1.h),
         child: ListView.builder(
           itemCount: grants.length,
@@ -95,6 +96,7 @@ class _GrantScreenState extends State<GrantScreen> {
                 );
               },
               child: Card(
+                color: bgColor3,
                 child: ListTile(
                   title: Text(
                     grants[index]['grant_name'],

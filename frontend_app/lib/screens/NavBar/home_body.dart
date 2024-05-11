@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:frontend_app/widgets/HomeBody/gauge_meter.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../models/grants_json.dart';
+import '../../widgets/HomeBody/gauge_meter.dart';
 import '../../widgets/constants/colors.dart';
 import '../../widgets/constants/texts.dart';
 import '../grants_screen.dart';
+import '../notification_screen.dart';
+import 'profile_screen.dart';
 
 class HomeBody extends StatefulWidget {
   const HomeBody({super.key});
@@ -41,9 +43,19 @@ class _HomeBodyState extends State<HomeBody> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                      radius: 6.w,
-                      backgroundColor: textBlack,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ProfileScreen(),
+                          ),
+                        );
+                      },
+                      child: CircleAvatar(
+                        radius: 6.w,
+                        backgroundColor: textBlack,
+                      ),
                     ),
                     SizedBox(width: 3.w),
                     Column(
@@ -61,7 +73,7 @@ class _HomeBodyState extends State<HomeBody> {
                         ),
                         Text(
                           'Company Name',
-                          style: h2TextStyle.copyWith(
+                          style: normalTextStyle.copyWith(
                             color: textWhite,
                           ),
                           maxLines: 1,
@@ -71,13 +83,23 @@ class _HomeBodyState extends State<HomeBody> {
                       ],
                     ),
                     const Spacer(),
-                    CircleAvatar(
-                      radius: 4.w,
-                      backgroundColor: bgColor3,
-                      child: Icon(
-                        Icons.notifications_outlined,
-                        color: textBlack,
-                        size: 20.sp,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const NotificationScreen(),
+                          ),
+                        );
+                      },
+                      child: CircleAvatar(
+                        radius: 5.w,
+                        backgroundColor: bgColor3,
+                        child: Icon(
+                          Icons.notifications_outlined,
+                          color: textBlack,
+                          size: 20.sp,
+                        ),
                       ),
                     )
                   ],
@@ -85,7 +107,7 @@ class _HomeBodyState extends State<HomeBody> {
                 Container(
                   width: 100.w,
                   height: 29.h,
-                  padding: EdgeInsets.symmetric(vertical: 2.h),
+                  padding: EdgeInsets.only(top: 2.h, right: 1.w),
                   child: gauge_meter(63),
                 ),
                 Padding(
@@ -209,11 +231,11 @@ class _HomeBodyState extends State<HomeBody> {
         ),
         Container(
           decoration: const BoxDecoration(
+            color: Color(0xfff1f1f1),
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
             ),
-            color: bgColor3,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -242,7 +264,7 @@ class _HomeBodyState extends State<HomeBody> {
                       child: Text(
                         'See more',
                         style: normalTextStyle.copyWith(
-                          color: Colors.deepPurple[600],
+                          color: bgColor1,
                         ),
                       ),
                     ),
@@ -258,6 +280,7 @@ class _HomeBodyState extends State<HomeBody> {
                   shrinkWrap: true,
                   itemBuilder: (context, index) {
                     return Card(
+                      color: bgColor3,
                       key: Key(grants[index]["grant_name"]),
                       child: ListTile(
                         title: Text(
