@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-
-import 'screens/home_screen.dart';
-import 'screens/splash_screen.dart';
+import 'package:frontend_app/screens/home_screen.dart';
+import 'package:sizer/sizer.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const MyApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Seed Spark',
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/splash',
-      routes: {
-        '/splash': (context) => const SplashScreen(),
-        '/home': (context) => const HomeScreen(),
+    return Sizer(
+      builder: (context, orientation, deviceType) {
+        return const MaterialApp(
+          title: 'Seed Spark',
+          debugShowCheckedModeBanner: false,
+          home: HomeScreen(),
+        );
       },
     );
   }

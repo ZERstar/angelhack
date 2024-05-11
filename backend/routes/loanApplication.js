@@ -2,7 +2,30 @@ const express = require('express');
 const router = express.Router();
 const LoanApplications = require('../model/loanApplication');
 const User = require('../model/user');
-
+const industryData = {
+    "industries": [
+        {
+            "name": "Technology",
+            "risk_percentage": 40
+        },
+        {
+            "name": "Manufacturing",
+            "risk_percentage": 60
+        },
+        {
+            "name": "Healthcare",
+            "risk_percentage": 50
+        },
+        {
+            "name": "Retail",
+            "risk_percentage": 70
+        },
+        {
+            "name": "Finance",
+            "risk_percentage": 45
+        }
+    ]
+}
 
 //elegibility
 // Dummy function to check SME eligibility (replace with actual logic)
@@ -33,7 +56,7 @@ function checkEligibility(smeData) {
     }
 
     const debtToEquityRatio = financials.total_liabilities / financials.total_assets;
-    if (debtToEquityRatio > 0.5) {
+    if (debtToEquityRatio > 0.7) {
         response.message = 'Excessive debt';
         return response;
     }
@@ -86,6 +109,71 @@ router.post('/check-eligibility/:id', async (req, res) => {
     res.json({ isEligible });
 });
 
+// Endpoint to assess risk for SME
+router.post('/assess-risk/:id', async (req, res) => {
+    const loan = await LoanApplications.findById(req.params.id);
+    const user = await User.findById(loan.user);
+    let smeData = {
+        industry: user.industry,
+        financials: user.financials,
+        credit_score: user.financials.credit_score,
+        business_age: user.company_age,
+        loan_amount: loan.loan_amount
+
+    };
+    // Validate SME data
+    if (!smeData) {
+        return res.status(400).json({ error: 'Invalid SME data' });
+    }
+
+    // Perform risk assessment (dummy logic)
+    const riskPercentage = calculateRisk(smeData);
+
+    // Return risk assessment result
+    res.json({ risk_percentage: riskPercentage });
+});
+
+// Dummy function to calculate risk (replace with actual logic)
+function calculateRisk(smeData) {
+    // Example risk factors and weights (you can adjust these based on your criteria)
+    const weights = {
+        credit_score: 0.2,
+        debt_to_equity_ratio: 0.2,
+        business_age: 0.2,
+        industry_risk: 0.2,
+        loan_amount: 0.2
+    };
+
+    let totalWeightedRisk = 0;
+
+    // Credit score factor (higher score reduces risk)
+    totalWeightedRisk += (1 - smeData.credit_score / 1000) * weights.credit_score;
+
+    // Debt-to-equity ratio factor (lower ratio reduces risk)
+    const debtToEquityRatio = smeData.financials.total_liabilities / smeData.financials.total_assets;
+    // console.log(totalWeightedRisk)
+
+    totalWeightedRisk += (0.5 + debtToEquityRatio) * weights.debt_to_equity_ratio;
+
+    // Business age factor (longer operation reduces risk)
+    totalWeightedRisk += (1 - smeData.business_age / 10) * weights.business_age;
+
+    // Industry risk factor (higher risk increases risk)
+    const industryRisk = industryData.industries.find(industry => industry.name === smeData.industry);
+    if (industryRisk) {
+        totalWeightedRisk += industryRisk.risk_percentage / 100 * weights.industry_risk;
+    } else {
+        // Default risk if industry is not found
+        totalWeightedRisk += 0.4 * weights.industry_risk;
+    }
+
+    // Loan amount factor (higher amount increases risk)
+    totalWeightedRisk += smeData.loan_amount / 1000000 * weights.loan_amount;
+    // Normalize risk percentage (0-100)
+    const riskPercentage = Math.min(100, Math.max(0, totalWeightedRisk * 100));
+
+    return riskPercentage;
+}
 
 
 
@@ -114,7 +202,15 @@ router.post('/new-loan', async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 });
-
+router.get('/', async (req, res) => {
+    try {
+        const loanApplications = await LoanApplications.find();
+        res.status(200).json(loanApplications);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
 // Route to get all loan applications for a specific user
 router.get('/:user_id', async (req, res) => {
     try {

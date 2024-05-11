@@ -30,7 +30,8 @@ router.post('/signup', async (req, res) => {
             financials: req.body.financials,
             banking_details: req.body.banking_details,
             gov_ids: req.body.gov_ids,
-            gst_details: req.body.gst_details
+            gst_details: req.body.gst_details,
+            company_age: req.body.company_age
         });
 
         // Save the new user
@@ -71,7 +72,7 @@ router.post('/login', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const users = await User.find();
-        res.json(users);
+        res.status(200).json(users);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -93,7 +94,7 @@ async function getUser(req, res, next) {
 }
 // Get a single user by ID
 router.get('/:id', getUser, (req, res) => {
-    res.json(res.user);
+    res.status(200).json(res.user);
 });
 
 
@@ -103,6 +104,9 @@ router.get('/:id', getUser, (req, res) => {
 // Update a user by ID
 router.patch('/:id', getUser, async (req, res) => {
     try {
+        if (req.body.company_age != null) {
+            res.user.company_age = req.body.company_age;
+        }
         if (req.body.password != null) {
             res.user.password = req.body.password;
         }
