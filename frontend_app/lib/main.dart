@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend_app/screens/SignUp/login_or_signup_screen.dart';
+import 'package:frontend_app/screens/on_boarding_screen.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         return const MaterialApp(
           title: 'Saaधन',
           debugShowCheckedModeBanner: false,
-          home: LoginOrSignUpScreen(),
+          home: OnBoardingScreen(),
         );
       },
     );
