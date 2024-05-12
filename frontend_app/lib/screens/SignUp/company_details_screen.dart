@@ -8,7 +8,20 @@ import '../../widgets/input_fields/textInputField.dart';
 import '../../widgets/mainButton.dart';
 
 class CompanyDetailScreen extends StatefulWidget {
-  const CompanyDetailScreen({super.key});
+  final String fullname;
+  final String number;
+  final String email;
+  final String password;
+  final String confirmPassword;
+
+  const CompanyDetailScreen({
+    Key? key,
+    required this.fullname,
+    required this.number,
+    required this.email,
+    required this.password,
+    required this.confirmPassword,
+  }) : super(key: key);
 
   @override
   State<CompanyDetailScreen> createState() => _CompanyDetailScreenState();
@@ -25,7 +38,7 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
   TextEditingController companyAgeController = TextEditingController();
 
   String industry = '';
-  List industries = [
+  List<String> industries = [
     'Education',
     'Healthcare',
     'Manufacturing',
@@ -138,7 +151,18 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const KYCDetailScreen(),
+                          builder: (context) => KYCDetailScreen(
+                            fullname: widget.fullname,
+                            number: widget.number,
+                            email: widget.email,
+                            password: widget.password,
+                            confirmPassword: widget.confirmPassword,
+                            companyName: companyName,
+                            regNo: regNo,
+                            companyAge: companyAge,
+                            industry: industry,
+                            gstNo: gstNo,
+                          ),
                         ));
                   }),
                 )

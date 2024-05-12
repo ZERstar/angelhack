@@ -20,19 +20,28 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   String fullname = '';
-  final fullNameController = TextEditingController();
-
   String number = '';
-  final phoneNumberController = TextEditingController();
-
   String email = '';
-  final emailController = TextEditingController();
-
   String password = '';
-  final passwordController = TextEditingController();
-
   String confirmPassword = '';
+
+  final fullNameController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controllers when the widget is disposed
+    fullNameController.dispose();
+    phoneNumberController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,13 +74,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       'Full Name',
                       const Icon(Icons.person_outline_rounded),
                       fullNameController, (value) {
-                    fullname = value;
+                    setState(() {
+                      fullname = value;
+                    });
                   }),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 2.h),
                   child: phoneField((value) {
-                    number = value;
+                    setState(() {
+                      number = value;
+                    });
                   }, const Icon(Icons.phone_android)),
                 ),
                 Padding(
@@ -80,7 +93,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       'Email',
                       const Icon(Icons.mail_outline_rounded),
                       emailController, (value) {
-                    email = value;
+                    setState(() {
+                      email = value;
+                    });
                   }),
                 ),
                 Padding(
@@ -88,7 +103,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: PasswordField(
                       labelText: 'Password',
                       onValueChanged: (value) {
-                        password = value;
+                        setState(() {
+                          password = value;
+                        });
                       }),
                 ),
                 Padding(
@@ -96,17 +113,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   child: PasswordField(
                       labelText: 'Confirm Password',
                       onValueChanged: (value) {
-                        confirmPassword = value;
+                        setState(() {
+                          confirmPassword = value;
+                        });
                       }),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 5.h),
-                  child:
-                      mainButton('Next', const Color(0xFF6caff4), textWhite, () {
+                  child: mainButton('Next', const Color(0xFF6caff4), textWhite,
+                      () {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const CompanyDetailScreen(),
+                          builder: (context) => CompanyDetailScreen(
+                            fullname: fullname,
+                            number: number,
+                            email: email,
+                            password: password,
+                            confirmPassword: confirmPassword,
+                          ),
                         ));
                   }),
                 )

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:frontend_app/screens/SignUp/login_screen.dart';
 import 'package:frontend_app/screens/SignUp/register_screen.dart';
 import 'package:frontend_app/widgets/constants/colors.dart';
 import 'package:frontend_app/widgets/constants/texts.dart';
@@ -43,7 +44,10 @@ class _LoginOrSignUpScreenState extends State<LoginOrSignUpScreen> {
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 5.w),
-            child: mainButton('Login', bgColor1, textWhite, () => null),
+            child: mainButton('Login', bgColor1, textWhite, () {
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()));
+            }),
           ),
           const Spacer(),
           const Spacer(),
