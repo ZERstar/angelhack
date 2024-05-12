@@ -103,9 +103,9 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Namaste",
+          title: "Namaste !!!",
           body:
-              "Let's name credit worthy for all.",
+              "Let's make credit worthy for all.",
           image: _buildImage('page_3.png'),
           decoration: pageDecoration,
         ),
