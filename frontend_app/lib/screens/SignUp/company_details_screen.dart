@@ -40,106 +40,111 @@ class _CompanyDetailScreenState extends State<CompanyDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 8.w),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 70.w,
-              child: Text(
-                'Company \nDetails',
-                style: h1TextStyle.copyWith(
-                  color: const Color(
-                    0xFF0076B5,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 8.w),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  width: 70.w,
+                  child: Text(
+                    'Company \nDetails',
+                    style: h1TextStyle.copyWith(
+                      color: const Color(
+                        0xFF0076B5,
+                      ),
+                      fontSize: 30.sp,
+                    ),
+                    maxLines: 2,
+                    textAlign: TextAlign.start,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  fontSize: 30.sp,
                 ),
-                maxLines: 2,
-                textAlign: TextAlign.start,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 2.h),
-              child: textInputField(
-                  'Company Name',
-                  const Icon(Icons.person_outline_rounded),
-                  companyNameController, (value) {
-                companyName = value;
-              }),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 2.h),
-              child: textInputField(
-                  'Registration Number',
-                  const Icon(Icons.mail_outline_rounded),
-                  regNoController, (value) {
-                regNo = value;
-              }),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 2.h),
-              child: textInputField(
-                  'Company Age',
-                  const Icon(Icons.edit_outlined),
-                  companyAgeController, (value) {
-                companyAge = value;
-              }),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 2.h),
-              child: Container(
-                width: 100.w,
-                decoration: BoxDecoration(
-                  border: Border.all(color: textBlack, width: 0.1.h),
-                  borderRadius: BorderRadius.circular(7),
+                Padding(
+                  padding: EdgeInsets.only(top: 2.h),
+                  child: textInputField(
+                      'Company Name',
+                      const Icon(Icons.person_outline_rounded),
+                      companyNameController, (value) {
+                    companyName = value;
+                  }),
                 ),
-                child: DropdownButton(
-                  hint: Text(
-                    'Select Industry'.toUpperCase(),
-                    style: normalTextStyle.copyWith(color: textBlack),
+                Padding(
+                  padding: EdgeInsets.only(top: 2.h),
+                  child: textInputField(
+                      'Registration Number',
+                      const Icon(Icons.mail_outline_rounded),
+                      regNoController, (value) {
+                    regNo = value;
+                  }),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 2.h),
+                  child: textInputField(
+                      'Company Age',
+                      const Icon(Icons.edit_outlined),
+                      companyAgeController, (value) {
+                    companyAge = value;
+                  }),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 2.h),
+                  child: Container(
+                    width: 100.w,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: textBlack, width: 0.1.h),
+                      borderRadius: BorderRadius.circular(7),
+                    ),
+                    child: DropdownButton(
+                      hint: Text(
+                        'Select Industry'.toUpperCase(),
+                        style: normalTextStyle.copyWith(color: textBlack),
+                      ),
+                      iconSize: 22.sp,
+                      iconEnabledColor: textBlack,
+                      padding: EdgeInsets.symmetric(horizontal: 5.w),
+                      underline: Container(),
+                      isExpanded: true,
+                      items: industries
+                          .map((ind) => DropdownMenuItem(
+                                child: Text(ind),
+                                value: ind,
+                              ))
+                          .toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          industry = value.toString();
+                        });
+                      },
+                    ),
                   ),
-                  iconSize: 22.sp,
-                  iconEnabledColor: textBlack,
-                  padding: EdgeInsets.symmetric(horizontal: 5.w),
-                  underline: Container(),
-                  isExpanded: true,
-                  items: industries
-                      .map((ind) => DropdownMenuItem(
-                            child: Text(ind),
-                            value: ind,
-                          ))
-                      .toList(),
-                  onChanged: (value) {
-                    setState(() {
-                      industry = value.toString();
-                    });
-                  },
                 ),
-              ),
+                Padding(
+                  padding: EdgeInsets.only(top: 2.h),
+                  child: textInputField(
+                      'GST Number',
+                      const Icon(Icons.travel_explore_outlined),
+                      gstNoController, (value) {
+                    gstNo = value;
+                  }),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 5.h),
+                  child: mainButton('Next', const Color(0xFF6caff4), textWhite,
+                      () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const KYCDetailScreen(),
+                        ));
+                  }),
+                )
+              ],
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 2.h),
-              child: textInputField(
-                  'GST Number',
-                  const Icon(Icons.travel_explore_outlined),
-                  gstNoController, (value) {
-                gstNo = value;
-              }),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 5.h),
-              child: mainButton('Next', const Color(0xFF6caff4), textWhite, () {
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const KYCDetailScreen(),
-                    ));
-              }),
-            )
-          ],
+          ),
         ),
       ),
     );
