@@ -26,9 +26,10 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
 
   Widget _buildImage(String assetName) {
     return Padding(
-      padding: EdgeInsets.only(top: 9.h),
+      padding: EdgeInsets.only(top: 15.h),
       child: Image.asset(
-        'assets/images/introduction/$assetName',
+        'assets/images/$assetName',
+        height: 30.h,
         width: 98.w,
       ),
     );
@@ -83,7 +84,7 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
       ),
       globalFooter: currentPageIndex == 2
           ? Padding(
-              padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 5.w),
+              padding: EdgeInsets.symmetric(vertical: 3.h, horizontal: 5.w),
               child: mainButton('Next', bgColor1, textWhite, routeLogin),
             )
           : SizedBox(
@@ -93,20 +94,19 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
         PageViewModel(
           title: "Saaधन",
           body: "Fuel your Growth, Master your Finance",
-          image: _buildImage('page_1.png'),
+          image: _buildImage('asset_1.png'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Growing Together",
           body: "Nurturing your business growth, side by side.",
-          image: _buildImage('page_2.png'),
+          image: _buildImage('asset_2.png'),
           decoration: pageDecoration,
         ),
         PageViewModel(
           title: "Namaste !!!",
-          body:
-              "Let's make credit worthy for all.",
-          image: _buildImage('page_3.png'),
+          body: "Let's make credit worthy for all.",
+          image: _buildImage('asset_3.png'),
           decoration: pageDecoration,
         ),
       ],

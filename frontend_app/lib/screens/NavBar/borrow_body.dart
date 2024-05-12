@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:frontend_app/screens/Loans/loan_purpose_screen.dart';
 import 'package:frontend_app/screens/Loans/view_loans_screen.dart';
 import 'package:sizer/sizer.dart';
@@ -641,28 +642,41 @@ class _LoansState extends State<Loans> {
                                       ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(vertical: 2.h),
-                                    child: Material(
-                                      elevation: 3,
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Container(
-                                        padding: EdgeInsets.symmetric(
-                                            horizontal: 15.w, vertical: 2.h),
-                                        decoration: BoxDecoration(
-                                          color: bgColor1,
-                                          borderRadius:
-                                              BorderRadius.circular(10),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              LoanPurposeScreen(
+                                            userId: userId,
+                                          ),
                                         ),
-                                        child: Text(
-                                          'Apply Now',
-                                          style: h2TextStyle.copyWith(
-                                              color: textWhite,
-                                              fontSize: 14.sp),
-                                          maxLines: 1,
-                                          textAlign: TextAlign.start,
-                                          overflow: TextOverflow.ellipsis,
+                                      );
+                                    },
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 2.h),
+                                      child: Material(
+                                        elevation: 3,
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 15.w, vertical: 2.h),
+                                          decoration: BoxDecoration(
+                                            color: bgColor1,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Text(
+                                            'Apply Now',
+                                            style: h2TextStyle.copyWith(
+                                                color: textWhite,
+                                                fontSize: 14.sp),
+                                            maxLines: 1,
+                                            textAlign: TextAlign.start,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
                                         ),
                                       ),
                                     ),

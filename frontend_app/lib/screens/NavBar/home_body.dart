@@ -49,13 +49,15 @@ class _HomeBodyState extends State<HomeBody> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const ProfileScreen(),
+                            builder: (context) => ProfileScreen(
+                              user_id: userId,
+                            ),
                           ),
                         );
                       },
                       child: CircleAvatar(
                         radius: 6.w,
-                        backgroundColor: textBlack,
+                        child: Image.asset('assets/images/profile.png'),
                       ),
                     ),
                     SizedBox(width: 3.w),
@@ -89,7 +91,9 @@ class _HomeBodyState extends State<HomeBody> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>  AllLoanScreen(user_id: userId,),
+                            builder: (context) => AllLoanScreen(
+                              user_id: userId,
+                            ),
                           ),
                         );
                       },

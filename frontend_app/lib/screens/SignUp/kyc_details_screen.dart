@@ -57,6 +57,14 @@ class _KYCDetailScreenState extends State<KYCDetailScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
+            height: 100.h,
+            width: 100.w,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/kyc_bg.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
             padding: EdgeInsets.symmetric(horizontal: 8.w),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

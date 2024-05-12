@@ -45,98 +45,105 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 8.w),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 70.w,
-                  child: Text(
-                    'Create \nyour account',
-                    style: h1TextStyle.copyWith(
-                      color: const Color(
-                        0xFF0076B5,
-                      ),
-                      fontSize: 30.sp,
-                    ),
-                    maxLines: 2,
-                    textAlign: TextAlign.start,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 2.h),
-                  child: textInputField(
-                      'Full Name',
-                      const Icon(Icons.person_outline_rounded),
-                      fullNameController, (value) {
-                    setState(() {
-                      fullname = value;
-                    });
-                  }),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 2.h),
-                  child: phoneField((value) {
-                    setState(() {
-                      number = value;
-                    });
-                  }, const Icon(Icons.phone_android)),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 2.h),
-                  child: textInputField(
-                      'Email',
-                      const Icon(Icons.mail_outline_rounded),
-                      emailController, (value) {
-                    setState(() {
-                      email = value;
-                    });
-                  }),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 2.h),
-                  child: PasswordField(
-                      labelText: 'Password',
-                      onValueChanged: (value) {
-                        setState(() {
-                          password = value;
-                        });
-                      }),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 2.h),
-                  child: PasswordField(
-                      labelText: 'Confirm Password',
-                      onValueChanged: (value) {
-                        setState(() {
-                          confirmPassword = value;
-                        });
-                      }),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 5.h),
-                  child: mainButton('Next', const Color(0xFF6caff4), textWhite,
-                      () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CompanyDetailScreen(
-                            fullname: fullname,
-                            number: number,
-                            email: email,
-                            password: password,
-                            confirmPassword: confirmPassword,
-                          ),
-                        ));
-                  }),
-                )
-              ],
+      body: SingleChildScrollView(
+        child: Container(
+          height: 100.h,
+          width: 100.w,
+          padding: EdgeInsets.symmetric(horizontal: 8.w),
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/create_account_bg.png'),
+              fit: BoxFit.cover,
             ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 10.h),
+              SizedBox(
+                width: 70.w,
+                child: Text(
+                  'Create \nyour account',
+                  style: h1TextStyle.copyWith(
+                    color: const Color(
+                      0xFF0076B5,
+                    ),
+                    fontSize: 30.sp,
+                  ),
+                  maxLines: 2,
+                  textAlign: TextAlign.start,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 2.h),
+                child: textInputField(
+                    'Full Name',
+                    const Icon(Icons.person_outline_rounded),
+                    fullNameController, (value) {
+                  setState(() {
+                    fullname = value;
+                  });
+                }),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 2.h),
+                child: phoneField((value) {
+                  setState(() {
+                    number = value;
+                  });
+                }, const Icon(Icons.phone_android)),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 2.h),
+                child: textInputField(
+                    'Email',
+                    const Icon(Icons.mail_outline_rounded),
+                    emailController, (value) {
+                  setState(() {
+                    email = value;
+                  });
+                }),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 2.h),
+                child: PasswordField(
+                    labelText: 'Password',
+                    onValueChanged: (value) {
+                      setState(() {
+                        password = value;
+                      });
+                    }),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 2.h),
+                child: PasswordField(
+                    labelText: 'Confirm Password',
+                    onValueChanged: (value) {
+                      setState(() {
+                        confirmPassword = value;
+                      });
+                    }),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 5.h),
+                child: mainButton('Next', const Color(0xFF6caff4), textWhite,
+                    () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CompanyDetailScreen(
+                          fullname: fullname,
+                          number: number,
+                          email: email,
+                          password: password,
+                          confirmPassword: confirmPassword,
+                        ),
+                      ));
+                }),
+              )
+            ],
           ),
         ),
       ),
