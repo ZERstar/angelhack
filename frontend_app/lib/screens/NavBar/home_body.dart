@@ -8,7 +8,7 @@ import '../../widgets/constants/colors.dart';
 import '../../widgets/constants/texts.dart';
 import '../grants_screen.dart';
 import '../notification_screen.dart';
-import 'profile_screen.dart';
+import '../profile_screen.dart';
 
 class HomeBody extends StatefulWidget {
   const HomeBody({super.key});
