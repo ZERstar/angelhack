@@ -201,22 +201,22 @@ router.post('/new-loan', async (req, res) => {
         await loanApplication.save();
 
         // Generate installment entries based on the specified interval
-        const installments = [];
-        const installmentAmount = loan_amount / interval;
-        const startDate = moment().startOf('month');
-        for (let i = 0; i < interval; i++) {
-            const dueDate = startDate.clone().add(i + 1, 'months').endOf('month');
-            installments.push({
-                user: user_id,
-                loanApplication: loanApplication._id,
-                amount: installmentAmount + (0.1 * loan_amount),
-                due_date: dueDate.toDate(), // Convert moment object to JavaScript Date
-                status: 'pending', // Initial status is pending
-            });
-        }
+        // const installments = [];
+        // const installmentAmount = loan_amount / interval;
+        // const startDate = moment().startOf('month');
+        // for (let i = 0; i < interval; i++) {
+        //     const dueDate = startDate.clone().add(i + 1, 'months').endOf('month');
+        //     installments.push({
+        //         user: user_id,
+        //         loanApplication: loanApplication._id,
+        //         amount: installmentAmount + (0.1 * loan_amount),
+        //         due_date: dueDate.toDate(), // Convert moment object to JavaScript Date
+        //         status: 'pending', // Initial status is pending
+        //     });
+        // }
 
-        // Insert installment entries into the database
-        await Installments.insertMany(installments);
+        // // Insert installment entries into the database
+        // await Installments.insertMany(installments);
 
         res.status(201).json(loanApplication);
     } catch (error) {
@@ -281,6 +281,29 @@ router.patch('/:loan_id', async (req, res) => {
 
         const loan_id = req.params.loan_id;
         const { status } = req.body;
+
+        if (status === 'approved') {
+            const installments = [];
+            const installmentAmount = loan_amount / interval;
+            const startDate = moment().startOf('month');
+            for (let i = 0; i < interval; i++) {
+                const dueDate = startDate.clone().add(i + 1, 'months').endOf('month');
+                installments.push({
+                    user: user_id,
+                    loanApplication: loanApplication._id,
+                    amount: installmentAmount + (0.1 * loan_amount),
+                    due_date: dueDate.toDate(), // Convert moment object to JavaScript Date
+                    status: 'pending', // Initial status is pending
+                });
+            }
+    
+            // Insert installment entries into the database
+            await Installments.insertMany(installments);
+
+            res.status(200).json(loanApplication);
+        }
+
+
 
         const loanApplication = await LoanApplications.findOneAndUpdate({ _id: loan_id }, { status: status }, { new: true });
 
