@@ -44,10 +44,10 @@ const SignIn = ({ setIsAuth }) => {
         <>
 
             <div className="md:flex h-screen w-full">
-                <div className=" hidden bg-[#4F5AF5] md:w-1/2 h-full md:flex items-center justify-center">
-                    <img src="assets/logoSignup.png" alt="Saadhan" width={480} />
+                <div className=" hidden bg-[#cde5ff] md:w-1/2 h-full md:flex items-center justify-center">
+                    <img src="assets/logo.png" alt="Saadhan" width={400} />
                 </div>
-                <div className="md:bg-[#4F5AF5] md:w-1/2  h-screen flex flex-col justify-center items-center">
+                <div className="md:bg-[#cde5ff] md:w-1/2  h-screen flex flex-col justify-center items-center">
                     <div className="bg-white md:border md:rounded-l-[40px] md:w-full h-screen flex flex-col justify-center items-center ">
                         <div className="text-left space-y-12">
                             <h1 className="text-4xl font-semibold">Welcome back!</h1>
@@ -69,9 +69,9 @@ const SignIn = ({ setIsAuth }) => {
                                 />
                                 <button
                                     type="submit"
-                                    className="bg-[#4F5AF5] text-white text-center py-2.5 rounded-full w-full font-bold mt-5"
+                                    className="bg-[#cde5ff] text-[#000000] text-center py-2.5 rounded-full w-full font-bold mt-5"
                                 >
-                                    logIn
+                                    Log In
                                 </button>
                             </form>
 

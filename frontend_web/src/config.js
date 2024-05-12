@@ -1,3 +1,3 @@
-const api = `http://saadhan-backend.up.railway.app`;
+const api = `http://saadhan-backend.up.railway.app/api`;
 
 export default api;
