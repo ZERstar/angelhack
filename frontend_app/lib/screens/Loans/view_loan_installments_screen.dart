@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/constants/colors.dart';
-import '../widgets/constants/texts.dart';
-
-class NotificationScreen extends StatefulWidget {
-  const NotificationScreen({super.key});
+class InstallmentScreen extends StatefulWidget {
+  const InstallmentScreen({super.key});
 
   @override
-  State<NotificationScreen> createState() => _NotificationScreenState();
+  State<InstallmentScreen> createState() => _InstallmentScreenState();
 }
 
-class _NotificationScreenState extends State<NotificationScreen> {
+class _InstallmentScreenState extends State<InstallmentScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Notification',
-          style: h1TextStyle.copyWith(color: textBlack),
-        ),
+        title: const Text('Loan Installments'),
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,

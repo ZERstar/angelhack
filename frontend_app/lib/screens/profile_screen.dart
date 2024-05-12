@@ -1,18 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:frontend_app/widgets/config_prod.dart';
 import 'package:frontend_app/widgets/input_fields/phoneField.dart';
 import 'package:frontend_app/widgets/input_fields/textInputField.dart';
 import 'package:frontend_app/widgets/mainButton.dart';
 import 'package:sizer/sizer.dart';
-
+import 'package:http/http.dart' as http;
 import '../widgets/constants/colors.dart';
 import '../widgets/constants/texts.dart';
 import 'SignUp/login_or_signup_screen.dart';
-import 'notification_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final String user_id;
+  const ProfileScreen({super.key, required this.user_id});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -95,6 +94,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+    String userId = widget.user_id;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF2873b4),
@@ -112,30 +112,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
           },
           child: const Icon(Icons.arrow_back_ios, color: textWhite),
         ),
-        actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 5.w),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const NotificationScreen(),
-                  ),
-                );
-              },
-              child: CircleAvatar(
-                radius: 4.w,
-                backgroundColor: bgColor3,
-                child: Icon(
-                  Icons.notifications_outlined,
-                  color: textBlack,
-                  size: 20.sp,
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
       body: Stack(
         children: [
@@ -250,8 +226,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 padding: EdgeInsets.symmetric(horizontal: 25.w),
                                 child:
                                     mainButton('Save', bgColor1, textWhite, () {
-                                  setState(() {
-                                    isPersonal = !isPersonal;
+                                  setState(() async {
+                                    final url =
+                                        '${AppConfig.baseUrl}/user/$userId';
+                                    final response =
+                                        await http.post(Uri.parse(url), body: {
+                                      'username': fullname,
+                                      'phone': phone,
+                                      'email': email,
+                                      'aadhar_card': aadhar,
+                                      'pan_card': pan
+                                    });
+                                    if (response.statusCode == 200) {
+                                      Navigator.pop(context);
+                                      isPersonal = !isPersonal;
+                                    } else {
+                                      return null;
+                                    }
                                   });
                                 }),
                               )
@@ -392,8 +383,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               Padding(
                                   padding: EdgeInsets.only(
                                       top: 2.h, right: 15.w, left: 15.w),
-                                  child:
-                                      mainButton('Save', bgColor1, textWhite, () {
+                                  child: mainButton('Save', bgColor1, textWhite,
+                                      () {
                                     setState(() {
                                       isAccount = !isAccount;
                                     });

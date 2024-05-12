@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:frontend_app/screens/home_screen.dart';
+import 'package:frontend_app/widgets/config_prod.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../widgets/constants/colors.dart';
@@ -7,8 +10,33 @@ import '../../widgets/constants/texts.dart';
 import '../../widgets/input_fields/textInputField.dart';
 import '../../widgets/mainButton.dart';
 
+import 'package:http/http.dart' as http;
+
 class KYCDetailScreen extends StatefulWidget {
-  const KYCDetailScreen({super.key});
+  final String fullname;
+  final String number;
+  final String email;
+  final String password;
+  final String confirmPassword;
+  final String companyName;
+  final String regNo;
+  final String companyAge;
+  final String industry;
+  final String gstNo;
+
+  const KYCDetailScreen({
+    Key? key,
+    required this.fullname,
+    required this.number,
+    required this.email,
+    required this.password,
+    required this.confirmPassword,
+    required this.companyName,
+    required this.regNo,
+    required this.companyAge,
+    required this.industry,
+    required this.gstNo,
+  }) : super(key: key);
 
   @override
   State<KYCDetailScreen> createState() => _KYCDetailScreenState();
@@ -29,6 +57,14 @@ class _KYCDetailScreenState extends State<KYCDetailScreen> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
+            height: 100.h,
+            width: 100.w,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/kyc_bg.png'),
+                fit: BoxFit.cover,
+              ),
+            ),
             padding: EdgeInsets.symmetric(horizontal: 8.w),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -51,16 +87,17 @@ class _KYCDetailScreenState extends State<KYCDetailScreen> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 2.h),
-                  child: textInputField('Aadhar Number',
-                      const Icon(Icons.edit_outlined), aadharController, (value) {
+                  child: textInputField(
+                      'Aadhar Number',
+                      const Icon(Icons.edit_outlined),
+                      aadharController, (value) {
                     aadharNumber = value;
                   }),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 2.h),
-                  child: textInputField(
-                      'Pan Number', const Icon(Icons.edit_outlined), panController,
-                      (value) {
+                  child: textInputField('Pan Number',
+                      const Icon(Icons.edit_outlined), panController, (value) {
                     panNumber = value;
                   }),
                 ),
@@ -121,11 +158,40 @@ class _KYCDetailScreenState extends State<KYCDetailScreen> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 4.h),
-                  child: mainButton('Done', bgColor2, textWhite, () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  child: mainButton('Done', bgColor2, textWhite, () async {
+                    const url = '${AppConfig.baseUrl}/user/signup';
+                    final response = await http.post(
+                      Uri.parse(url),
+                      body: {
+                        'username': widget.fullname,
+                        'phone': widget.number,
+                        'email': widget.email,
+                        'password': widget.password,
+                        'company_name': widget.companyName,
+                        'registration_number': widget.regNo,
+                        'company_age': widget.companyAge,
+                        'industry': widget.industry,
+                        'gst_number': widget.gstNo,
+                        'aadhar_card': aadharNumber,
+                        'pan_card': panNumber,
+                      },
                     );
+
+                    if (response.statusCode == 201) {
+                      final user = json.decode(response.body)['user'];
+                      final userId = user['id'];
+                      debugPrint('this is user id $userId');
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomeScreen(
+                                  userId: userId,
+                                )),
+                      );
+                    } else {
+                      // Handle error response
+                      print('Error: ${response.body}');
+                    }
                   }),
                 ),
               ],
