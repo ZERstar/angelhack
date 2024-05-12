@@ -91,21 +91,21 @@ class OnBoardingScreenState extends State<OnBoardingScreen> {
             ),
       pages: [
         PageViewModel(
-          title: "List Your Stall",
-          body: "List you stall/ food truck/ Restaurant on nukkad foods.",
+          title: "Saaधन",
+          body: "Fuel your Growth, Master your Finance",
           image: _buildImage('page_1.png'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Accept Orders",
-          body: "Fix your menu, and accept orders from customers ",
+          title: "Growing Together",
+          body: "Nurturing your business growth, side by side.",
           image: _buildImage('page_2.png'),
           decoration: pageDecoration,
         ),
         PageViewModel(
-          title: "Relax!",
+          title: "Namaste",
           body:
-              "Prepare order and hand over to the delivery partner to deliver deliciousness.",
+              "Let's name credit worthy for all.",
           image: _buildImage('page_3.png'),
           decoration: pageDecoration,
         ),
