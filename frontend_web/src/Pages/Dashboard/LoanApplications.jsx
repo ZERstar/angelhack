@@ -8,6 +8,7 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import api from "../../config";
 import { getUsers } from "../../service/user";
 import axios from "axios";
+import LoanDetails from "../../components/LoanDetails";
 
 const items = [
   {
@@ -32,6 +33,7 @@ const LoanApplications = ({ setIsAuth }) => {
   console.log("items", items);
   // const { t } = useTranslation();
   const [loanData, setLoanData] = useState([]);
+  const [addLoanData, setAddLoanData] = useState();
   const [modalTitle, setModalTitle] = useState("");
   const [showModal, setShowModal] = useState(false);
 
@@ -56,14 +58,14 @@ const LoanApplications = ({ setIsAuth }) => {
     fetchAllLoans();
   }, []);
 
-  // const openModal = (title) => {
-  //   setModalTitle(title);
-  //   setShowModal(true);
-  // };
+  const openModal = (title) => {
+    setModalTitle(title);
+    setShowModal(false);
+  };
 
-  // const closeModal = () => {
-  //   setShowModal(false);
-  // };
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
 
   return (
@@ -90,7 +92,7 @@ const LoanApplications = ({ setIsAuth }) => {
               </thead>
               <tbody>
                 {loanData.map((loan) => (
-                  <tr key={loan._id}>
+                  <tr key={loan._id} onClick={() => { setAddLoanData(loan); setShowModal(true) }}>
                     <td className="border px-[3.5vw] py-3">{loan.user.company_name}</td>
                     <td className="border px-[3.5vw] py-3">{loan.created_at.split("T")[0]}</td>
                     <td className="border px-[3.5vw] py-3">{loan.loan_purpose}</td>
@@ -124,7 +126,8 @@ const LoanApplications = ({ setIsAuth }) => {
       <div className="flex justify-center pb-6">
 
       </div>
-    </div>
+      {showModal && <LoanDetails title={modalTitle} onClose={closeModal} loanData={addLoanData} />}
+    </div >
     //   </div>
     // </div>
   );

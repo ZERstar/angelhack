@@ -41,7 +41,7 @@ const AppInner = ({ setIsAuth }) => {
                     <Routes>
                         <Route index element={<Home setIsAuth={setIsAuth} />} />
                         <Route path='/loan-application' element={<LoanApplications setIsAuth={setIsAuth} />} />
-                        <Route path='/user-profile/*' element={<User setIsAuth={setIsAuth} />} />
+                        <Route path='/user-profile/:userId' element={<User setIsAuth={setIsAuth} />} />
                         {/*<Route path='/translate' element={<Translate setIsAuth={setIsAuth} />} />
                         <Route path='/report' element={<Report setIsAuth={setIsAuth} />} />
                         <Route path='/social-media' element={<SocialMedia setIsAuth={setIsAuth} />} />
