@@ -1,5 +1,6 @@
 import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:frontend_app/screens/NavBar/borrow_body.dart';
 import 'package:frontend_app/screens/NavBar/home_body.dart';
 import 'package:frontend_app/screens/NavBar/market_place_body.dart';
@@ -14,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final _pageController = PageController(initialPage: 0);
+  final _pageController = PageController(initialPage: 1);
 
   final NotchBottomBarController _controller =
       NotchBottomBarController(index: 1);
@@ -36,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
       MarketPlaceBody(),
     ];
     return Scaffold(
-      backgroundColor: bgColor3,
+      backgroundColor: const Color(0xFFf1f1f1),
       extendBody: true,
       body: PageView(
         controller: _pageController,
@@ -46,36 +47,33 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: (bottomBarPages.length <= maxCount)
           ? AnimatedNotchBottomBar(
+              showBottomRadius: true,
+              bottomBarHeight: 8.h,
+              bottomBarWidth: 95.w,
               notchColor: bgColor1,
               notchBottomBarController: _controller,
-              bottomBarItems: const [
+              bottomBarItems: [
                 BottomBarItem(
-                  inActiveItem: Icon(
-                    Icons.home,
+                  inActiveItem: SvgPicture.asset(
+                    'assets/icons/borrow.svg',
                     color: textBlack,
                   ),
-                  activeItem: Icon(
-                    Icons.home,
+                  activeItem: SvgPicture.asset(
+                    'assets/icons/borrow.svg',
                     color: textWhite,
                   ),
                 ),
-                BottomBarItem(
-                  inActiveItem: Icon(
-                    Icons.home,
-                    color: textBlack,
-                  ),
-                  activeItem: Icon(
-                    Icons.home,
-                    color: textWhite,
-                  ),
+                const BottomBarItem(
+                  inActiveItem: Icon(Icons.home_outlined, color: textBlack),
+                  activeItem: Icon(Icons.home_outlined, color: textWhite),
                 ),
                 BottomBarItem(
-                  inActiveItem: Icon(
-                    Icons.home,
+                  inActiveItem: SvgPicture.asset(
+                    'assets/icons/marketplace.svg',
                     color: textBlack,
                   ),
-                  activeItem: Icon(
-                    Icons.home,
+                  activeItem: SvgPicture.asset(
+                    'assets/icons/marketplace.svg',
                     color: textWhite,
                   ),
                 ),

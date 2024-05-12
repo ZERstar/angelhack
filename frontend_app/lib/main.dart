@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend_app/screens/home_screen.dart';
+import 'package:frontend_app/screens/SignUp/login_or_signup_screen.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -14,9 +14,9 @@ class MyApp extends StatelessWidget {
     return Sizer(
       builder: (context, orientation, deviceType) {
         return const MaterialApp(
-          title: 'Seed Spark',
+          title: 'Saaधन',
           debugShowCheckedModeBanner: false,
-          home: HomeScreen(),
+          home: LoginOrSignUpScreen(),
         );
       },
     );

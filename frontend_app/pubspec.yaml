@@ -41,6 +41,8 @@ dependencies:
   provider: ^6.1.2
   animated_notch_bottom_bar: ^1.0.3
   syncfusion_flutter_gauges: ^25.2.3
+  flutter_svg: ^2.0.10+1
+  intl_phone_field: ^3.2.0
 
 dev_dependencies:
   flutter_test:
@@ -63,7 +65,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
+  assets:
+    - assets/icons/
+    - assets/images/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
