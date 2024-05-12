@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from "react";
 import api from "../config";
 
 const HomeModal = ({ title, onClose, loanData }) => {
-    const [risk, setRisk] = useState()
+    const [risk, setRisk] = useState(0)
     if (loanData.risk_percentage != 0) {
         setRisk(loanData.risk_percentage)
     }
@@ -38,7 +38,9 @@ const HomeModal = ({ title, onClose, loanData }) => {
     const handleApprove = (id) => {
 
         console.log(id)
-        axios.patch(`${api}/loanapp/${id}`, { status: "approved" })
+        axios.patch(`${api}/loanapp/${id}`, { status: "approved" }).then(res => {
+            window.location.reload()
+        })
     }
     const handleReject = (id) => {
         axios.patch(`${api}/loanapp/${id}`, { status: "rejected" })
@@ -82,13 +84,13 @@ const HomeModal = ({ title, onClose, loanData }) => {
 
                                 <div>
                                     <div className="grid grid-cols-2 gap-4">
-                                        {loanData.risk_percentage != 0 ?
+                                        {risk != 0 ?
                                             (
                                                 <>
                                                     <div className="p-4">
                                                         <div>
                                                             <span className="font-semibold">Risk: </span>
-                                                            <span>{loanData.risk_percentage}%</span>
+                                                            <span>{risk.toFixed(2)}%</span>
                                                         </div>
                                                     </div>
 
