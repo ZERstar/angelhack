@@ -130,6 +130,8 @@ router.post('/assess-risk/:id', async (req, res) => {
 
     // Perform risk assessment (dummy logic)
     const riskPercentage = calculateRisk(smeData);
+    loan.risk_percentage = riskPercentage
+    await loan.save();
 
     // Return risk assessment result
     res.json({ risk_percentage: riskPercentage });
@@ -255,7 +257,14 @@ router.post('/new-loan', async (req, res) => {
 router.get('/', async (req, res) => {
     try {
         const loanApplications = await LoanApplications.find();
-        res.status(200).json(loanApplications);
+        const formattedLoanApplications = await Promise.all(loanApplications.map(async loan => {
+            const user = await User.findById(loan.user);
+            return {
+                ...loan.toObject(),
+                user: user
+            };
+        }));
+        res.status(200).json(formattedLoanApplications);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Server error' });
