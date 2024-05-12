@@ -128,8 +128,8 @@ router.post("/assess-risk/:id", async (req, res) => {
     return res.status(400).json({ error: "Invalid SME data" });
   }
 
-  // Perform risk assessment (dummy logic)
-  const riskPercentage = calculateRisk(smeData);
+    // Perform risk assessment (dummy logic)
+    const riskPercentage = calculateRisk(smeData);
 
   // Return risk assessment result
   res.json({ risk_percentage: riskPercentage });
@@ -250,14 +250,14 @@ router.post("/new-loan", async (req, res) => {
 //         res.status(500).json({ error: 'Server error' });
 //     }
 // });
-router.get("/", async (req, res) => {
-  try {
-    const loanApplications = await LoanApplications.find();
-    res.status(200).json(loanApplications);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Server error" });
-  }
+router.get('/', async (req, res) => {
+    try {
+        const loanApplications = await LoanApplications.find();
+        res.status(200).json(loanApplications);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Server error' });
+    }
 });
 // Route to get all loan applications for a specific user
 router.get("/:user_id", async (req, res) => {

@@ -50,7 +50,7 @@ const Sidebar = () => {
               <span>Home</span>
             </NavLink>
             <NavLink
-              to="/loan-Application"
+              to="/loan-application"
               className={`focus:text-[#0076b5] xl:text-[16px] text-[12px] flex items-center gap-2 focus:bg-[#ECF2FB] w-full rounded-l-full py-3 px-5 ${location.pathname === "/email-generate" ? "bg-[#ECF2FB] text-[#0076b5]" : ""}`}
               activeClassName="bg-[#ECF2FB] text-[#0076b5]"
             >

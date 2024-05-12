@@ -8,7 +8,9 @@ import 'package:frontend_app/widgets/constants/colors.dart';
 import 'package:sizer/sizer.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final String userId;
+
+  const HomeScreen({required this.userId, Key? key});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -31,10 +33,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const List<Widget> bottomBarPages = [
-      BorrowBody(),
-      HomeBody(),
-      MarketPlaceBody(),
+    String id = widget.userId;
+    List<Widget> bottomBarPages = [
+      BorrowBody(id: id),
+      HomeBody(
+        userId: id,
+      ),
+      const MarketPlaceBody(),
     ];
     return Scaffold(
       backgroundColor: const Color(0xFFf1f1f1),

@@ -18,7 +18,7 @@ export default function Header({ setIsAuth }) {
     switch (path) {
       case "/":
         return "Admin Panel";
-      case "/loan-Application":
+      case "/loan-application":
         return "Loan Application";
       // case "/translate":
       //   return t('translate');
@@ -33,7 +33,7 @@ export default function Header({ setIsAuth }) {
       // case "/profile":
       //   return t('profilePage');
       default:
-        return "";
+        return "Admin Panel";
     }
   }
   // const openCreditModal = () => {

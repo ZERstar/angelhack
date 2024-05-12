@@ -36,12 +36,16 @@ const loanApplicationSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['step1', 'step2', 'step3', 'step4', 'approved', 'rejected'],
-        default: 'step1'
+        enum: ['pending', 'approved', 'rejected'],
+        default: 'pending'
     },
     eligibility: {
         eligible: { type: Boolean, default: false },
         message: { type: String }
+    },
+    risk_percentage: {
+        type: Number,
+        default: 0
     },
 
     created_at: {

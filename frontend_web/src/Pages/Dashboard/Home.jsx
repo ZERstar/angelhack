@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect, useRef } from "react";
 import Header from "./Header";
 // import { toast } from "react-toastify";
@@ -8,25 +9,9 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import api from "../../config";
 import { getUsers } from "../../service/user";
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
-const items = [
-  {
-    title: `textGenerated`,
-    count: 10808,
-  },
-  {
-    title: "reportGenerated",
-    count: 40,
-  },
-  {
-    title: "contentGenerated",
-    count: 10696,
-  },
-  {
-    title: "hoursSaved",
-    count: 36,
-  },
-];
 
 const Home = ({ setIsAuth }) => {
   // const { t } = useTranslation();
@@ -40,10 +25,7 @@ const Home = ({ setIsAuth }) => {
         console.log("res", res);
         setUserData(res.data);
       });
-      if (data) {
-        console.log("data", data);
-        setUserData(data);
-      }
+
     } catch (error) {
       console.error("Failed to fetch profile data:", error);
     } finally {
@@ -54,6 +36,8 @@ const Home = ({ setIsAuth }) => {
   useEffect(() => {
     fetchAllUsers();
   }, []);
+
+  const navigate = useNavigate();
 
   // const openModal = (title) => {
   //   setModalTitle(title);
@@ -89,7 +73,7 @@ const Home = ({ setIsAuth }) => {
               </thead>
               <tbody>
                 {userData.map((user) => (
-                  <tr key={user._id}>
+                  <tr className=" cursor-pointer" onClick={(e) => { e.preventDefault(); navigate(`/user-profile/${user._id}`) }} key={user._id}>
                     <td className="border px-[3.5vw] py-3">{user.company_name}</td>
                     <td className="border px-[3.5vw] py-3">{user.registration_number}</td>
                     <td className="border px-[3.5vw] py-3">{user.industry}</td>

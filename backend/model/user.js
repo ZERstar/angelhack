@@ -41,7 +41,10 @@ const userSchema = new mongoose.Schema({
     financials: {
         annual_revenue: Number,
         annual_profit: Number,
-        credit_score: Number,
+        credit_score: {
+            type: Number,
+            default: 650
+        },
         total_liabilities: Number,
         total_assets: Number
     },

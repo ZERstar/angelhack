@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:frontend_app/screens/Loans/view_loans_screen.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../models/grants_json.dart';
@@ -7,11 +7,11 @@ import '../../widgets/HomeBody/gauge_meter.dart';
 import '../../widgets/constants/colors.dart';
 import '../../widgets/constants/texts.dart';
 import '../grants_screen.dart';
-import '../notification_screen.dart';
 import '../profile_screen.dart';
 
 class HomeBody extends StatefulWidget {
-  const HomeBody({super.key});
+  final String userId;
+  const HomeBody({super.key, required this.userId});
 
   @override
   State<HomeBody> createState() => _HomeBodyState();
@@ -20,6 +20,7 @@ class HomeBody extends StatefulWidget {
 class _HomeBodyState extends State<HomeBody> {
   @override
   Widget build(BuildContext context) {
+    String userId = widget.userId;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -88,7 +89,7 @@ class _HomeBodyState extends State<HomeBody> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const NotificationScreen(),
+                            builder: (context) =>  AllLoanScreen(user_id: userId,),
                           ),
                         );
                       },
