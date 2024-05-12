@@ -5,6 +5,7 @@ import Sidebar from '../components/Sidebar';
 import Home from '../Pages/Dashboard/Home';
 import Header from '../Pages/Dashboard/Header';
 import LoanApplications from '../Pages/Dashboard/LoanApplications';
+import User from '../Pages/Dashboard/User';
 // import Email from '../Pages/Dashboard/Email';
 // import Translate from '../Pages/Dashboard/Translate';
 // import Report from '../Pages/Dashboard/Report';
@@ -40,6 +41,7 @@ const AppInner = ({ setIsAuth }) => {
                     <Routes>
                         <Route index element={<Home setIsAuth={setIsAuth} />} />
                         <Route path='/loan-application' element={<LoanApplications setIsAuth={setIsAuth} />} />
+                        <Route path='/user-profile/*' element={<User setIsAuth={setIsAuth} />} />
                         {/*<Route path='/translate' element={<Translate setIsAuth={setIsAuth} />} />
                         <Route path='/report' element={<Report setIsAuth={setIsAuth} />} />
                         <Route path='/social-media' element={<SocialMedia setIsAuth={setIsAuth} />} />

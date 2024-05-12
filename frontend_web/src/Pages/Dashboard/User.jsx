@@ -1,54 +1,10 @@
-import { useNavigate } from 'react-router-dom';
 import React, { useState, useEffect, useRef } from "react";
-import Header from "./Header";
-// import { toast } from "react-toastify";
-// import { fetchUserDetailsService, updateProfileService } from "../../service/user";
-import { FaExternalLinkAlt } from "react-icons/fa";
-// import { useTranslation } from 'react-i18next';
-// import HomeModal from "../../Components/homeModal";
 import api from "../../config";
-import { getUsers } from "../../service/user";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { Navigate } from "react-router-dom";
 
 
-const Home = ({ setIsAuth }) => {
-  // const { t } = useTranslation();
-  const [userData, setUserData] = useState([]);
-  const [modalTitle, setModalTitle] = useState("");
-  const [showModal, setShowModal] = useState(false);
-
-  const fetchAllUsers = async () => {
-    try {
-      axios.get(`${api}/user`).then((res) => {
-        console.log("res", res);
-        setUserData(res.data);
-      });
-
-    } catch (error) {
-      console.error("Failed to fetch profile data:", error);
-    } finally {
-      console.log("Profile data fetched successfully");
-    }
-  };
-
-  useEffect(() => {
-    fetchAllUsers();
-  }, []);
-
-  const navigate = useNavigate();
-
-  // const openModal = (title) => {
-  //   setModalTitle(title);
-  //   setShowModal(true);
-  // };
-
-  // const closeModal = () => {
-  //   setShowModal(false);
-  // };
-
-
+const User = ({ isAuth }) => {
+  console.log("user-profile")
   return (
     // <div className="md:bg-[#4F5AF5]">
     //   <div className="p-3 md:rounded-l-[65px] bg-[#ECF2FB] md:h-screen md:w-full w-screen flex flex-col overflow-hidden">
@@ -60,7 +16,7 @@ const Home = ({ setIsAuth }) => {
             SME Listing
           </div>
           <div className="overflow-x-auto text-[#000000] flex items-center justify-center pt-4">
-            <table className="table-auto">
+            {/* <table className="table-auto">
               <thead>
                 <tr>
                   <th className="px-[3.5vw] py-3">Company Name</th>
@@ -73,7 +29,7 @@ const Home = ({ setIsAuth }) => {
               </thead>
               <tbody>
                 {userData.map((user) => (
-                  <tr className=" cursor-pointer" onClick={(e) => { e.preventDefault(); navigate(`/user-profile/${user._id}`) }} key={user._id}>
+                  <tr key={user._id}>
                     <td className="border px-[3.5vw] py-3">{user.company_name}</td>
                     <td className="border px-[3.5vw] py-3">{user.registration_number}</td>
                     <td className="border px-[3.5vw] py-3">{user.industry}</td>
@@ -82,7 +38,7 @@ const Home = ({ setIsAuth }) => {
                   </tr>
                 ))}
               </tbody>
-            </table>
+            </table> */}
           </div>
           {/* <div className="relative bg-gradient-to-r from-[#6874FF] to-[#404DE0] shadow-lg rounded-3xl h-full p-8 flex flex-col justify-center space-y-2"> */}
           {/* <h1 className="text-2xl md:text-3xl font-bold">
@@ -113,4 +69,4 @@ const Home = ({ setIsAuth }) => {
   );
 };
 
-export default Home;
+export default User;

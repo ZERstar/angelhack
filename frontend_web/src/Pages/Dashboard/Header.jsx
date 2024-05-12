@@ -33,7 +33,7 @@ export default function Header({ setIsAuth }) {
       // case "/profile":
       //   return t('profilePage');
       default:
-        return "";
+        return "Admin Panel";
     }
   }
   // const openCreditModal = () => {
